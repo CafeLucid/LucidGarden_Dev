@@ -18,7 +18,6 @@ public class CameraMove : MonoBehaviour
 
     public int testLevel = 0;
 
-    public List<Vector2> cameraBounds = new List<Vector2>();
 
     private void Start()
     {
@@ -85,8 +84,8 @@ public class CameraMove : MonoBehaviour
         var currentPosition = transform.position;
         var targetPosition = currentPosition + directionForce;
         transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.01f);
-        float x = cameraBounds[(int)testLevel/2].x - width;
-        float y = cameraBounds[(int)testLevel/2].y - height;
+        float x = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].x - width;
+        float y = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].y - height;
         float clampX = Mathf.Clamp(transform.position.x, -x, x);
         float clampY = Mathf.Clamp(transform.position.y, -y, y);
         transform.position = new Vector3(clampX, clampY, -10f);
