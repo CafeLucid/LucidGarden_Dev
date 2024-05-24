@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public MarketController marketManager;
     public QuickSlotController quickSlotManager;
 
+    public List<Vector2> boundPerLevel = new List<Vector2>();
+
+    public int currentLevel = 0;
+
     private void Awake()
     {
         if (instance == null)
