@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 public class QuickSlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public ItemSO itemData;
-    public Action<ItemSO> DropItem;
 
     // 마우스 드래그가 시작 됐을 때 발생하는 이벤트
     public void OnBeginDrag(PointerEventData eventData)
@@ -40,9 +39,9 @@ public class QuickSlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
         if(hit.collider != null)
         {
-            if(hit.collider.GetComponent<Animal>() != null)
+            if(hit.collider.GetComponent<ItemChatBubble>() != null)
             {
-                DropItem?.Invoke(itemData);
+                DragSlot.instance.DropItem?.Invoke(itemData);
             }
         }
 

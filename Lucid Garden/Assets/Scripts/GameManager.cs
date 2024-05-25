@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
     }
     private void LevelUp()
     {
-        if (currentLevel + 1 > 9) return;
+        if (currentLevel + 1 > 5) return;
         currentLevel++;
-        if(currentLevel % 2 == 0) cameraManager.LevelUp(currentLevel/2);
+        cameraManager.LevelUp(currentLevel);
     }
 }
