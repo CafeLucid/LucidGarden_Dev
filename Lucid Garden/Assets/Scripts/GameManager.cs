@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public StatusController statusManager;
     public MarketController marketManager;
     public QuickSlotController quickSlotManager;
+    public CameraController cameraManager;
 
     public List<Vector2> boundPerLevel = new List<Vector2>();
 
@@ -24,5 +25,18 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LevelUp();
+        }
+    }
+    private void LevelUp()
+    {
+        if (currentLevel + 1 > 9) return;
+        currentLevel++;
+        if(currentLevel % 2 == 0) cameraManager.LevelUp(currentLevel/2);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public List<GameObject> animals;
-    public int maxAnimalCount = 10;
+    public List<int> maxAnimalCount = new List<int>();
     public int currentAnimalCount = 0;
     public float spawnTime = 2f;
     public float currentTime = 0f;
@@ -14,7 +14,7 @@ public class SpawnController : MonoBehaviour
     {
         if (currentTime >= spawnTime)
         {
-            if (currentAnimalCount < maxAnimalCount)
+            if (currentAnimalCount < maxAnimalCount[GameManager.instance.currentLevel])
             {
                 SpawnAnimal();
                 currentAnimalCount++;
