@@ -8,6 +8,7 @@ public class Animal : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    public DPChatBubble chatBubble;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,6 +23,10 @@ public class Animal : MonoBehaviour
         float clampedX = Mathf.Clamp(transform.position.x, -x, x);
         float clampedY = Mathf.Clamp(transform.position.y, -y, y);
         transform.position = new Vector3(clampedX, clampedY, 0);
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            chatBubble.Show();
+        }
     }
     public void Move()
     {
