@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ using UnityEngine.EventSystems;
 public class DPChatBubble : MonoBehaviour
 {
     public bool isActive;
-
+    public Action OnHappen;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -28,6 +29,7 @@ public class DPChatBubble : MonoBehaviour
     public void Hide()
     {
         isActive = false;
+        OnHappen?.Invoke();
         gameObject.SetActive(false);
     }
 }
