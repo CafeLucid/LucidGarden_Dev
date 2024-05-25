@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
         if (GameManager.instance.timeManager.fever.isFever)
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(0, 0, -10f), 0.2f);
+            return;
         }
         if (isZooming) return;
         if (DragSlot.instance.isDragging) return;
