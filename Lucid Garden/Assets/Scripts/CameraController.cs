@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -18,10 +17,6 @@ public class CameraController : MonoBehaviour
     private float height;
     private float width;
 
-    private float Speed = 0.25f;
-    private Vector2 nowPos, prePos;
-    private Vector3 movePos;
-
     public int testLevel = 0;
     public List<Tilemap> blocks = new List<Tilemap>();
 
@@ -36,28 +31,14 @@ public class CameraController : MonoBehaviour
         isMoving = false;
         isZooming = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (isZooming) return;
         if (DragSlot.instance.isDragging) return;
-        /*ControlCameraPosition();
+        ControlCameraPosition();
         ReduceDirectionForce();
-        UpdateCameraPosition();*/
-        if (Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                prePos = touch.position - touch.deltaPosition;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                nowPos = touch.position - touch.deltaPosition;
-                movePos = (Vector3)(prePos - nowPos) * Time.deltaTime * Speed;
-                transform.Translate(movePos);
-                prePos = touch.position - touch.deltaPosition;
-            }
-        }
+        UpdateCameraPosition();
+        
     }
     private void ControlCameraPosition()
     {
