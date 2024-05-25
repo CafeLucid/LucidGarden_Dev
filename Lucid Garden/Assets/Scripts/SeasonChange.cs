@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,8 +13,6 @@ public class SeasonChange : MonoBehaviour
     public List<Sprite> house;
     public List<Sprite> market;
     public List<Sprite> streetLight;
-    public List<AnimatorController> treeRAnim;
-    public List<AnimatorController> treeSAnim;
     public SpriteRenderer marketRenderer;
     public Transform houseParent;
     public Transform streetLightParent;
@@ -38,11 +35,11 @@ public class SeasonChange : MonoBehaviour
         marketRenderer.sprite = market[0];
         foreach(Transform child in treeRParent)
         {
-            child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[0];
+            child.GetComponent<Animator>().SetInteger("Season", 0);
         }
         foreach(Transform child in treeSParent)
         {
-            child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[0];
+            child.GetComponent<Animator>().SetInteger("Season", 0);
             child.GetChild(0).gameObject.SetActive(false);
         }
     }
@@ -75,11 +72,11 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[1];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[1];
+                    child.GetComponent<Animator>().SetInteger("Season", 1);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[1];
+                    child.GetComponent<Animator>().SetInteger("Season", 1);
                 }
                 season++;
                 break;
@@ -97,11 +94,11 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[2];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[2];
+                    child.GetComponent<Animator>().SetInteger("Season", 2);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[2];
+                    child.GetComponent<Animator>().SetInteger("Season", 2);
                 }
                 season++;
                 break;
@@ -119,7 +116,7 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[3];
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[3];
+                    child.GetComponent<Animator>().SetInteger("Season", 3);
                     child.GetChild(0).gameObject.SetActive(true);
                 }
                 season++;
@@ -138,11 +135,11 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[0];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[0];
+                    child.GetComponent<Animator>().SetInteger("Season", 0);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[0];
+                    child.GetComponent<Animator>().SetInteger("Season", 0);
                     child.GetChild(0).gameObject.SetActive(false);
                 }
                 season = 0;

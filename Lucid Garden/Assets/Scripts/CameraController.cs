@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour
@@ -18,6 +17,10 @@ public class CameraController : MonoBehaviour
     private Camera mainCamera;
     private float height;
     private float width;
+
+    private float Speed = 0.25f;
+    private Vector2 nowPos, prePos;
+    private Vector3 movePos;
 
     public int testLevel = 0;
     public List<Tilemap> blocks = new List<Tilemap>();
@@ -37,9 +40,24 @@ public class CameraController : MonoBehaviour
     {
         if (isZooming) return;
         if (DragSlot.instance.isDragging) return;
-        ControlCameraPosition();
+        /*ControlCameraPosition();
         ReduceDirectionForce();
-        UpdateCameraPosition();
+        UpdateCameraPosition();*/
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                prePos = touch.position - touch.deltaPosition;
+            }
+            else if (touch.phase == TouchPhase.Moved)
+            {
+                nowPos = touch.position - touch.deltaPosition;
+                movePos = (Vector3)(prePos - nowPos) * Time.deltaTime * Speed;
+                transform.Translate(movePos);
+                prePos = touch.position - touch.deltaPosition;
+            }
+        }
     }
     private void ControlCameraPosition()
     {
@@ -93,9 +111,9 @@ public class CameraController : MonoBehaviour
         }
         var currentPosition = transform.position;
         var targetPosition = currentPosition + directionForce;
-        transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.01f);
-        float x = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].x - width;
-        float y = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].y - height;
+        transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.2f);
+        float x = GameManager.instance.boundPerLevel[GameManager.instance.currentLevel].x - width;
+        float y = GameManager.instance.boundPerLevel[GameManager.instance.currentLevel].y - height;
         float clampX = Mathf.Clamp(transform.position.x, -x, x);
         float clampY = Mathf.Clamp(transform.position.y, -y, y);
         transform.position = new Vector3(clampX, clampY, -10f);
