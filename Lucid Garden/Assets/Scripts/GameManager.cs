@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelUp()
     {
-        if (currentLevel + 1 > 5) return;
+        if (currentLevel + 1 > 4) return;
         currentLevel++;
         cameraManager.LevelUp(currentLevel);
     }
