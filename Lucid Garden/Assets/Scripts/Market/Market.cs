@@ -6,13 +6,30 @@ public class Market : MonoBehaviour
 {
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.instance.marketManager.marketUI.marketUI.activeSelf)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
-            if (hit.collider != null && hit.collider.GetComponent<Market>() != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                GameManager.instance.marketManager.marketUI.marketUI.SetActive(true);
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
+                if (hit.collider == null || hit.collider.GetComponent<MarketUI>() == null)
+                {
+                    GameManager.instance.marketManager.marketUI.marketUI.SetActive(false);
+                }
+            }
+        }
+
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
+                if (hit.collider != null && hit.collider.GetComponent<Market>() != null)
+                {
+                    GameManager.instance.marketManager.marketUI.marketUI.SetActive(true);
+                    Debug.Log("Market On");
+                }
             }
         }
     }
