@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public QuickSlotController quickSlotManager;
     public CameraController cameraManager;
     public SeasonChange timeManager;
+    public SpawnController spawnManager;
 
     public List<Vector2> boundPerLevel = new List<Vector2>();
 

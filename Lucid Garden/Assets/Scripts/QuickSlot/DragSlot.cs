@@ -8,7 +8,6 @@ public class DragSlot : MonoBehaviour
     public QuickSlotItem dragSlot;
     public ItemSO itemData;
     public bool isDragging = false;
-    public Action<ItemSO> DropItem;
 
     [SerializeField]
     private Image itemImage;

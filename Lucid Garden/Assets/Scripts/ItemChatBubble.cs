@@ -7,10 +7,6 @@ public class ItemChatBubble : MonoBehaviour
     public SpriteRenderer itemImage;
     public bool isActive;
     public Action OnHappen;
-    private void Start()
-    {
-        DragSlot.instance.DropItem += DropItem;
-    }
     public void Show()
     {
         isActive = true;
@@ -25,6 +21,7 @@ public class ItemChatBubble : MonoBehaviour
     public void DropItem(ItemSO dropItem)
     {
         if (dropItem == null) return;
+        Debug.Log("ItemChatBubbleDrop");
         OnDropItem?.Invoke(dropItem);
         Hide();
     }

@@ -46,9 +46,11 @@ public class Animal : MonoBehaviour
             else itemBubble.Show();
             currentTime = 0;
         }
-        if(itemCount == 5)
+        if(itemCount == 1)
         {
+            GameManager.instance.statusManager.happiness.AddHappy(100);
             Destroy(gameObject);
+            GameManager.instance.spawnManager.currentAnimalCount--;
         }
     }
     public void Move()

@@ -22,7 +22,7 @@ public class Happiness : MonoBehaviour
     {
         currentHappy += happy;
         UpdateHappyText();
-        if(currentHappy == 2300 || currentHappy == 4000 || currentHappy == 6100 || currentHappy == 8600)
+        if(currentHappy == 100 || currentHappy == 300 || currentHappy == 700 || currentHappy == 1500)
         {
             GameManager.instance.LevelUp();
         }

@@ -21,6 +21,7 @@ public class QuickSlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             DragSlot.instance.dragSlot = this;
             DragSlot.instance.DragSetImage(itemData.Sprite);
             DragSlot.instance.transform.position = eventData.position;
+            DragSlot.instance.itemData = itemData;
         }
     }
 
@@ -39,9 +40,11 @@ public class QuickSlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
         if(hit.collider != null)
         {
-            if(hit.collider.GetComponent<ItemChatBubble>() != null)
+            Debug.Log(hit.collider.name);
+            if (hit.collider.GetComponent<ItemChatBubble>() != null)
             {
-                DragSlot.instance.DropItem?.Invoke(itemData);
+                Debug.Log("ItemChatBubble");
+                hit.collider.GetComponent<ItemChatBubble>().DropItem(DragSlot.instance.itemData);
             }
         }
 
