@@ -22,6 +22,7 @@ public class SeasonChange : MonoBehaviour
     public int season = 0;
     public float currentTime = 0f;
     public float changeTime = 5f;
+    public Fever fever;
     void Awake()
     {
         season = 0;
@@ -104,6 +105,7 @@ public class SeasonChange : MonoBehaviour
                 season++;
                 break;
             case 2:
+                fever.FeverStart();
                 tilemaps[2].SetActive(false);
                 tilemaps[3].SetActive(true);
                 foreach (Transform child in houseParent)
