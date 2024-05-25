@@ -1,8 +1,6 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour
@@ -33,13 +31,14 @@ public class CameraController : MonoBehaviour
         isMoving = false;
         isZooming = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (isZooming) return;
         if (DragSlot.instance.isDragging) return;
         ControlCameraPosition();
         ReduceDirectionForce();
         UpdateCameraPosition();
+        
     }
     private void ControlCameraPosition()
     {
@@ -93,9 +92,9 @@ public class CameraController : MonoBehaviour
         }
         var currentPosition = transform.position;
         var targetPosition = currentPosition + directionForce;
-        transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.01f);
-        float x = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].x - width;
-        float y = GameManager.instance.boundPerLevel[(int)GameManager.instance.currentLevel/2].y - height;
+        transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.2f);
+        float x = GameManager.instance.boundPerLevel[GameManager.instance.currentLevel].x - width;
+        float y = GameManager.instance.boundPerLevel[GameManager.instance.currentLevel].y - height;
         float clampX = Mathf.Clamp(transform.position.x, -x, x);
         float clampY = Mathf.Clamp(transform.position.y, -y, y);
         transform.position = new Vector3(clampX, clampY, -10f);

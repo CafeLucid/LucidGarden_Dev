@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Sirenix.OdinInspector;
 
 public class SeasonChange : MonoBehaviour
 {
     public Tilemap tilemap;
+    public List<GameObject> tilemaps;
     public List<TileBase> spring;
     public List<TileBase> summer;
     public List<TileBase> autumn;
@@ -14,8 +14,6 @@ public class SeasonChange : MonoBehaviour
     public List<Sprite> house;
     public List<Sprite> market;
     public List<Sprite> streetLight;
-    public List<AnimatorController> treeRAnim;
-    public List<AnimatorController> treeSAnim;
     public SpriteRenderer marketRenderer;
     public Transform houseParent;
     public Transform streetLightParent;
@@ -38,11 +36,11 @@ public class SeasonChange : MonoBehaviour
         marketRenderer.sprite = market[0];
         foreach(Transform child in treeRParent)
         {
-            child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[0];
+            child.GetComponent<Animator>().SetInteger("Season", 0);
         }
         foreach(Transform child in treeSParent)
         {
-            child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[0];
+            child.GetComponent<Animator>().SetInteger("Season", 0);
             child.GetChild(0).gameObject.SetActive(false);
         }
     }
@@ -62,8 +60,8 @@ public class SeasonChange : MonoBehaviour
         switch (season)
         {
             case 0:
-                for (int i = 0; i < spring.Count; i++)
-                    tilemap.SwapTile(spring[i], summer[i]);
+                tilemaps[0].SetActive(false);
+                tilemaps[1].SetActive(true);
                 foreach (Transform child in houseParent)
                 {
                     child.GetComponent<SpriteRenderer>().sprite = house[1];
@@ -75,17 +73,17 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[1];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[1];
+                    child.GetComponent<Animator>().SetInteger("Season", 1);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[1];
+                    child.GetComponent<Animator>().SetInteger("Season", 1);
                 }
                 season++;
                 break;
             case 1:
-                for (int i = 0; i < summer.Count; i++)
-                    tilemap.SwapTile(summer[i], autumn[i]);
+                tilemaps[1].SetActive(false);
+                tilemaps[2].SetActive(true);
                 foreach (Transform child in houseParent)
                 {
                     child.GetComponent<SpriteRenderer>().sprite = house[2];
@@ -97,17 +95,17 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[2];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[2];
+                    child.GetComponent<Animator>().SetInteger("Season", 2);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[2];
+                    child.GetComponent<Animator>().SetInteger("Season", 2);
                 }
                 season++;
                 break;
             case 2:
-                for (int i = 0; i < autumn.Count; i++)
-                    tilemap.SwapTile(autumn[i], winter[i]);
+                tilemaps[2].SetActive(false);
+                tilemaps[3].SetActive(true);
                 foreach (Transform child in houseParent)
                 {
                     child.GetComponent<SpriteRenderer>().sprite = house[3];
@@ -119,14 +117,14 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[3];
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[3];
+                    child.GetComponent<Animator>().SetInteger("Season", 3);
                     child.GetChild(0).gameObject.SetActive(true);
                 }
                 season++;
                 break;
             case 3:
-                for (int i = 0; i < winter.Count; i++)
-                    tilemap.SwapTile(winter[i], spring[i]);
+                tilemaps[3].SetActive(false);
+                tilemaps[0].SetActive(true);
                 foreach (Transform child in houseParent)
                 {
                     child.GetComponent<SpriteRenderer>().sprite = house[0];
@@ -138,15 +136,33 @@ public class SeasonChange : MonoBehaviour
                 marketRenderer.sprite = market[0];
                 foreach (Transform child in treeRParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeRAnim[0];
+                    child.GetComponent<Animator>().SetInteger("Season", 0);
                 }
                 foreach (Transform child in treeSParent)
                 {
-                    child.GetComponent<Animator>().runtimeAnimatorController = treeSAnim[0];
+                    child.GetComponent<Animator>().SetInteger("Season", 0);
                     child.GetChild(0).gameObject.SetActive(false);
                 }
                 season = 0;
                 break;
         }
+    }
+    [Button]
+    public void Change_Summer()
+    {
+        for (int i = 0; i < spring.Count; i++)
+            tilemap.SwapTile(spring[i], summer[i]);
+    }
+    [Button]
+    public void Change_Autumn()
+    {
+        for (int i = 0; i < summer.Count; i++)
+            tilemap.SwapTile(spring[i], autumn[i]);
+    }
+    [Button]
+    public void Change_Winter()
+    {
+        for (int i = 0; i < autumn.Count; i++)
+            tilemap.SwapTile(spring[i], winter[i]);
     }
 }
