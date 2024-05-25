@@ -28,7 +28,6 @@ public class Market : MonoBehaviour
                 if (hit.collider != null && hit.collider.GetComponent<Market>() != null)
                 {
                     GameManager.instance.marketManager.marketUI.marketUI.SetActive(true);
-                    Debug.Log("Market On");
                 }
             }
         }

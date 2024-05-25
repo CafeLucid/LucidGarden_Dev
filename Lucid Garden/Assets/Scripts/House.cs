@@ -5,9 +5,15 @@ using UnityEngine;
 public class House : MonoBehaviour
 {
     public float currentTime = 0f;
-    public float chatBubbleTime = 5f;
-
+    public float chatBubbleTime = 300f;
+    
     public DPChatBubble dreamPieceBubble;
+
+    void Start()
+    {
+        dreamPieceBubble = GetComponentInChildren<DPChatBubble>();
+        dreamPieceBubble.OnHappen += AfterBubble;
+    }
 
     void Update()
     {
@@ -17,5 +23,10 @@ public class House : MonoBehaviour
             dreamPieceBubble.Show();
             currentTime = 0;
         }
+    }
+
+    public void AfterBubble()
+    {
+        currentTime = 0;
     }
 }
