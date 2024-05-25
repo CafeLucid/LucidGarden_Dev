@@ -23,6 +23,8 @@ public class Animal : MonoBehaviour
         dreamPieceBubble = GetComponentInChildren<DPChatBubble>();
         itemBubble = GetComponentInChildren<ItemChatBubble>();
         itemBubble.OnDropItem += DropItem;
+        dreamPieceBubble.OnHappen += AfterBubble;
+        itemBubble.OnHappen += AfterBubble;
         requireItem = itemSet.items[Random.Range(0, itemSet.items.Count)];
         itemBubble.itemImage.sprite = requireItem.Sprite;
         itemCount = 0;
@@ -77,5 +79,9 @@ public class Animal : MonoBehaviour
     {
         if (dropItem == requireItem) itemCount++;
         GameManager.instance.quickSlotManager.RemoveItem(dropItem.ID, 1);
+    }
+    public void AfterBubble()
+    {
+        currentTime = 0;
     }
 }
