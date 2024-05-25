@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         if (isZooming) return;
+        if (DragSlot.instance.isDragging) return;
         ControlCameraPosition();
         ReduceDirectionForce();
         UpdateCameraPosition();

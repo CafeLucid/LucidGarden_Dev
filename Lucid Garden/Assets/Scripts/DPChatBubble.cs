@@ -5,6 +5,19 @@ using UnityEngine.EventSystems;
 
 public class DPChatBubble : MonoBehaviour
 {
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
+            if(hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                GameManager.instance.statusManager.dreamPiece.AddDP(10);
+                Hide();
+            }
+        }
+    }
     public void Show()
     {
         gameObject.SetActive(true);
@@ -12,17 +25,5 @@ public class DPChatBubble : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
-    }
-    private void OnMouseDown()
-    {
-        Debug.Log("DPChatBubble OnMouseDown");
-        GameManager.instance.statusManager.dreamPiece.AddDP(1);
-        Hide();
-    }
-    public void OnClick()
-    {
-        Debug.Log("DPChatBubble OnClick");
-        GameManager.instance.statusManager.dreamPiece.AddDP(1);
-        Hide();
     }
 }
