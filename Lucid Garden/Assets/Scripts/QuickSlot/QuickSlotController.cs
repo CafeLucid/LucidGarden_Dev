@@ -8,11 +8,14 @@ public class QuickSlotController : MonoBehaviour
 
     public void Awake()
     {
-        items.Add(10001, 0);
-        items.Add(10002, 0);
-        items.Add(10003, 0);
-        items.Add(10004, 0);
-        items.Add(10005, 0);
+        if (items.Count == 0)
+        {
+            items.Add(10001, 0);
+            items.Add(10002, 0);
+            items.Add(10003, 0);
+            items.Add(10004, 0);
+            items.Add(10005, 0);
+        }
 
         UpdateItemCount();
     }

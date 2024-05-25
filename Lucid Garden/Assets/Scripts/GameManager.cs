@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel = 0;
 
+    private int ClickCount = 0;
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DataController.instance.LoadData();
     }
 
     private void Update()
@@ -34,6 +36,31 @@ public class GameManager : MonoBehaviour
         {
             LevelUp();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClickCount++;
+            if (!IsInvoking("DoubleClick"))
+                Invoke("DoubleClick", 1.0f);
+
+        }
+        else if (ClickCount == 2)
+        {
+            CancelInvoke("DoubleClick");
+            DataController.instance.SaveData();
+            Application.Quit();
+        }
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            DataController.instance.SaveData();
+        }
+        if (Input.GetKeyDown(KeyCode.Menu))
+        {
+            DataController.instance.SaveData();
+        }
+    }
+    void DoubleClick()
+    {
+        ClickCount = 0;
     }
 
     public void LevelUp()
