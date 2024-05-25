@@ -14,7 +14,7 @@ public class SpawnController : MonoBehaviour
     {
         if (currentTime >= spawnTime)
         {
-            if (currentAnimalCount < maxAnimalCount[currentAnimalCount])
+            if (currentAnimalCount < maxAnimalCount[GameManager.instance.currentLevel])
             {
                 SpawnAnimal();
                 currentAnimalCount++;
