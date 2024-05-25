@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public MarketController marketManager;
     public QuickSlotController quickSlotManager;
     public CameraController cameraManager;
+    public SeasonChange timeManager;
 
     public List<Vector2> boundPerLevel = new List<Vector2>();
 
