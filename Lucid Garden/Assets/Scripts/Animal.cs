@@ -40,7 +40,7 @@ public class Animal : MonoBehaviour
         transform.position = new Vector3(clampedX, clampedY, 0);
 
         currentTime += Time.deltaTime;
-        if (currentTime >= chatBubbleTime)
+        if (currentTime >= chatBubbleTime && !dreamPieceBubble.isActive && !itemBubble.isActive)
         {
             int random = Random.Range(0, 100);
             if(random < 80) dreamPieceBubble.Show();
