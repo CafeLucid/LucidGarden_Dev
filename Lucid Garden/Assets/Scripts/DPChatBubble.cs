@@ -8,6 +8,7 @@ public class DPChatBubble : MonoBehaviour
 {
     public bool isActive;
     public Action OnHappen;
+    public int earnDP = 0;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -16,7 +17,7 @@ public class DPChatBubble : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
-                GameManager.instance.statusManager.dreamPiece.AddDP(10);
+                GameManager.instance.statusManager.dreamPiece.AddDP(earnDP);
                 Hide();
             }
         }

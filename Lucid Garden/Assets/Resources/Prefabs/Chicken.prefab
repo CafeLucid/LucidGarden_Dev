@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
+  earnDP: 10
 --- !u!61 &6539234488958148922
 BoxCollider2D:
   m_ObjectHideFlags: 0
