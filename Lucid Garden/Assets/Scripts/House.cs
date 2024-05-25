@@ -13,6 +13,7 @@ public class House : MonoBehaviour
     {
         dreamPieceBubble = GetComponentInChildren<DPChatBubble>();
         dreamPieceBubble.OnHappen += AfterBubble;
+        dreamPieceBubble.Hide();
     }
 
     void Update()
