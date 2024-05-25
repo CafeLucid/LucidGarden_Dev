@@ -10,6 +10,5 @@ public class QuickSlotUI : MonoBehaviour
 {
     public GameObject quickSlotUI;
     public TextMeshProUGUI[] itemCounts;
-    public List<DragSlot> dragSlots;
 }
 

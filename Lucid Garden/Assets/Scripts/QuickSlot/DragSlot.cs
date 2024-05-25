@@ -15,9 +15,10 @@ public class DragSlot : MonoBehaviour
     [SerializeField]
     private Image itemImage;
 
-    void Start()
+    private void Awake()
     {
         instance = this;
+        SetColor(0);
     }
 
     public void DragSetImage(Sprite _itemImage)
