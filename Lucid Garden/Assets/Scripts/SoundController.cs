@@ -8,7 +8,7 @@ public class SoundController : MonoBehaviour
     public AudioSource cow;
     public AudioSource roaster;
     public AudioSource click;
-
+    public AudioSource dreamPiece;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -18,7 +18,13 @@ public class SoundController : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            click.Play();
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, 0f);
+            if (hit.collider != null && hit.collider.GetComponent<DreamPiece>() != null)
+            {
+                dreamPiece.Play();
+            }
+            else click.Play();
         }
     }
 
