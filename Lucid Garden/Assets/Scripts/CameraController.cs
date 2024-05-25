@@ -145,4 +145,11 @@ public class CameraController : MonoBehaviour
         isZooming = false;
         UI.SetActive(true);
     }
+    public void RemoveBlocks()
+    {
+        for(int i = 0; i < GameManager.instance.currentLevel; i++)
+        {
+            blocks[i].gameObject.SetActive(false);
+        }
+    }
 }
